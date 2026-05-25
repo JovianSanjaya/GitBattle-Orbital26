@@ -9,7 +9,7 @@ function SignUp() {
 
   return (
     <main className="auth-screen">
-      
+
       <BackBtn></BackBtn>
       
       <form className="auth-form">
@@ -31,9 +31,7 @@ function SignUp() {
           <input className="auth-input" type="password" />
         </label>
 
-        <button className="auth-button font-press-start" type="button">
-          Create An Account
-        </button>
+        <button className="auth-button font-press-start" > Create An Account </button>
 
         <div className="auth-divider">
           <span></span>
@@ -41,18 +39,12 @@ function SignUp() {
           <span></span>
         </div>
 
-        <button className="auth-button google-button font-press-start" type="button">
+        <button className="auth-button google-button font-press-start" >
           <GoogleIcon />
           Continue With Google
         </button>
 
-        <button
-          className="auth-link-button"
-          type="button"
-          onClick={() => navigate("/login")}
-        >
-          Already have an account?
-        </button>
+        <button className="auth-link-button" onClick={() => navigate("/login")}>  Already have an account?  </button>
       </form>
     </main>
   );

@@ -13,7 +13,7 @@ function Landing(){
             <section className="landing">
                 <header className="landing-header">
                     
-                    <button className="logo-title" type="button">
+                    <button className="logo-title">
                         <img className="landing-logo" src={logo} alt="GitBattle Logo" />
                         <span className="landing-title font-press-start">GitBattle</span>
                     </button>

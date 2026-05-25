@@ -15,12 +15,12 @@ function MultiplayerRoom(){
             </h2>
 
             <div className="multiplayer-section">
-                
+
                  <BackBtn></BackBtn>
 
                 <div className="multiplayer-actions">
-                    <button className="multiplayer-btn font-press-start" type="button" onClick={() => navigate('/create-room')}>Create A Room</button>
-                    <button className="multiplayer-btn font-press-start" type="button" onClick={() => setShowJoinRoom(true)}>Join A Room</button>
+                    <button className="multiplayer-btn font-press-start"  onClick={() => navigate('/create-room')}>Create A Room</button>
+                    <button className="multiplayer-btn font-press-start"  onClick={() => setShowJoinRoom(true)}>Join A Room</button>
                 </div>
 
             </div>

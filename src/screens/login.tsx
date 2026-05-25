@@ -25,7 +25,7 @@ function Login() {
           <input className="auth-input" type="password" />
         </label>
 
-        <button className="auth-button font-press-start" type="button"> Continue </button>
+        <button className="auth-button font-press-start" > Continue </button>
 
         <div className="auth-divider">
           <span></span>
@@ -33,12 +33,12 @@ function Login() {
           <span></span>
         </div>
 
-        <button className="auth-button google-button font-press-start" type="button">
+        <button className="auth-button google-button font-press-start" >
           <GoogleIcon />
           Continue With Google
         </button>
 
-        <button className="auth-link-button" type="button"  onClick={() => navigate("/signup")}>  Create an account </button>
+        <button className="auth-link-button" onClick={() => navigate("/signup")}>  Create an account </button>
       </form>
     </main>
   );

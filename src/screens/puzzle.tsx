@@ -18,7 +18,7 @@ function Puzzle() {
         <div className="puzzle-grid">
             {puzzles.map((puzzle) => {
                 return(               
-                    <button className={`puzzle-card ${puzzle.locked ? "puzzle-card-locked" : ""}`} type="button" key={puzzle.title}>
+                    <button className={`puzzle-card ${puzzle.locked ? "puzzle-card-locked" : ""}`} key={puzzle.title}>
                         <span className={`puzzle-level ${puzzle.level === "Intermediate" ? "puzzle-level-intermediate" : "" }`}> {puzzle.level} </span>
                         <h2 className="puzzle-card-title font-press-start"> {puzzle.title} </h2>
                         <p className="puzzle-card-description"> {puzzle.description} </p>
