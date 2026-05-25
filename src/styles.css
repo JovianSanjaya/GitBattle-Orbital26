@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Press+Start+2P&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -11,6 +12,7 @@
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior: none;
 }
 
 body {
@@ -21,11 +23,55 @@ body {
     linear-gradient(105deg, #ffc1e6 0%, #dfcff7 45%, #82b6ff 100%);
 }
 
+/* for every page */
+body::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100%;
+  height: 3.4rem;
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-size: auto 3.6rem;
+}
+
+
 .landing{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
+
+/* for exception like choosing mode only */
+.grass-tile-top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3.4rem;
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-size: auto 3.6rem;
+  transform: scaleY(-1);
+}
+
+/* for exception like choosing mode only  */
+.grass-tile{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3.4rem;
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-size: auto 3.6rem;
+}
+
+
+
 
 .landing-header {
   display: flex;
@@ -40,7 +86,7 @@ body {
   height: 2px;
   margin: 0.8rem 1.2rem 0;
   background: rgba(255, 255, 255, 0.75);
-  border-radius: 999px;
+  border-radius: 1000px;
 }
 
 .font-press-start {
@@ -80,7 +126,7 @@ body {
   padding: 0.55rem 2rem;
   min-width: 10.625rem;
   height: 2.75rem;
-  border-radius: 2.5rem;
+  border-radius: 1rem;
   border: 1px solid #000;
   background: #fff;
   color: #000;
@@ -88,6 +134,8 @@ body {
 }
 
 .landing-intro-hero {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -113,23 +161,25 @@ body {
 }
 
 .mode-section{
+  z-index: 1;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 3rem 7rem;
+  padding: 1rem 7rem;
+  position: relative;
 }
 
 .mode-actions {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.7rem;
 }
 
 .mode-btn{
-  font-size: 1.3rem;
-  width: 40.0rem;
-  height: 8.8rem;
+  font-size: 1.15rem;
+  width: 40rem;
+  height: 8rem;
   border-radius: 3.1rem;
   border: 1px solid #000;
   background: #fff;
@@ -148,4 +198,331 @@ body {
   margin: 0;
   align-self: center;
   margin-right: 5rem;
+}
+
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2.5rem 1.5rem;
+  position: relative;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 29rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-title {
+  margin: 0 0 2.25rem;
+  text-align: center;
+  font-size: 3rem;
+  color: #2a1a4a;
+}
+
+.auth-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.7rem;
+  color: #6b6470;
+  font-family: var(--font-press-start);
+}
+
+.auth-input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid #000;
+  border-radius: 0.75rem;
+  background: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  font-family: Arial, sans-serif;
+}
+
+.auth-button {
+  min-height: 2.75rem;
+  border: 1px solid #000;
+  border-radius: 3.1rem;
+  background: #fff;
+  color: #000;
+  font-size: 0.6rem;
+  cursor: pointer;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-press-start);
+
+
+}
+
+.auth-divider span {
+  height: 1px;
+  flex: 1;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.auth-divider p {
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.google-logo {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+}
+
+.auth-link-button {
+  margin-top: 1.25rem;
+  border: none;
+  background: transparent;
+  color: #2a1a4a;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: var(--font-press-start);
+
+}
+
+
+.puzzle{
+   min-height: 100vh;
+  position: relative;
+  padding: 4.8rem 5rem 2.25rem;
+  overflow: hidden;
+}
+
+.back-btn{
+  position: absolute;
+  top: 2.5rem;
+  left: 5rem;
+  width: 3.7rem;
+  height: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid #000;
+  border-radius: 0.85rem;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  font-family: var(--font-press-start);
+  font-size: 0.55rem;
+}
+
+
+.back-arrow {
+  font-family: Arial, sans-serif;
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.puzzle-title {
+  margin: 0 0 4.2rem;
+  text-align: center;
+  color: #1b0d47;
+  font-size: 3.2rem;
+  line-height: 1.15;
+}
+
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5.6rem 4.4rem;
+}
+
+.puzzle-card {
+  min-height: 10rem;
+  padding: 1.45rem 1.65rem 1.35rem;
+  border: 1px solid #000;
+  border-radius: 1.25rem;
+  background: #fff;
+  color: #000;
+  text-align: left;
+  box-shadow: 0 0.18rem 0.32rem rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.puzzle-card-locked {
+  background:
+    radial-gradient(circle, rgba(0, 0, 0, 0.53) 0.06rem, transparent 0.17rem),
+    #f0f0ed;
+  background-size: 0.25rem 0.25rem;
+  box-shadow: none;
+}
+
+.puzzle-level {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.4rem;
+  height: 2rem;
+  padding: 0 1.1rem;
+  border: 1px solid #0b5d49;
+  border-radius: 3.1rem;
+  background: #16866a;
+  color: #fff;
+  font-family: var(--font-press-start);
+  font-size: 0.44rem;
+}
+
+.puzzle-level-intermediate {
+  border-color: #8b3d24;
+  background: #b95f41;
+}
+
+.puzzle-card-title {
+  margin: 0.95rem 0 0.65rem;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.puzzle-card-description {
+  margin: 0;
+  max-width: 19rem;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+}
+
+
+
+
+.multiplayer{
+  min-height: 100vh;
+  position: relative;
+  padding: 4.6rem 5.4rem;
+}
+
+
+.multiplayer-section{
+  margin-top: 9rem;
+  padding-left: 2.2rem;
+}
+
+
+
+.multiplayer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 3.4rem;
+}
+
+.multiplayer-btn{
+  font-size: 1.15rem;
+  max-width: 100%;
+  width: 40rem;
+  height: 7rem;
+  border-radius: 3.1rem;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em;
+}
+
+.multiplayer-title {
+  font-size: 3rem;
+  color: #2a1a4a;
+  text-align: center;
+  margin: 0;
+  line-height: 1.15;
+
+}
+
+
+
+
+
+
+
+.join-room-blur{
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.35rem);
+}
+
+
+
+.join-room-container{
+  width: 31rem;
+  max-width: 100%;
+  min-height: 16.25rem;
+  padding: 3rem 4rem 2.5rem;
+  border: 1px solid #000;
+  border-radius: 1.25rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.join-room-title{
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+
+.join-room-input{
+  width: 100%;
+  height: 4.5rem;
+  border: 1px solid #000;
+  border-radius: 1.1rem;
+  padding: 0 1rem;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  outline: none;
+}
+
+.join-room-action{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 3.8rem;
+  margin-top: 1.25rem;
+}
+
+
+.join-room-btn{
+  flex: 1;
+  height: 2.25rem;
+  border: 1px solid #000;
+  border-radius: 3.1rem;
+  background: #fff;
+  color: #000;
+  font-size: 0.5rem;
+  cursor: pointer;
 }
