@@ -1,5 +1,6 @@
 admin_folder/
 .env
+.env.*
 .DS_Store
 
 # Node modules
@@ -9,6 +10,8 @@ node_modules/
 dist/
 frontend/dist/
 backend/dist/
+*.tsbuildinfo
+backend/src/*.js
 
 # Go build artifacts
 backend/bin/
@@ -31,3 +34,5 @@ yarn-error.log*
 
 # Coverage reports
 coverage/
+
+docker-compose.dev.yml

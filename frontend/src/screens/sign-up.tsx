@@ -1,7 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
-import GoogleIcon from "../components/google-icon";
 import BackBtn from  "../components/back-btn";
+import GoogleAuth from "../auth/google-auth";
 
 
 function SignUp() {
@@ -39,10 +39,7 @@ function SignUp() {
           <span></span>
         </div>
 
-        <button className="auth-button google-button font-press-start" >
-          <GoogleIcon />
-          Continue With Google
-        </button>
+        <GoogleAuth />
 
         <button className="auth-link-button" onClick={() => navigate("/login")}>  Already have an account?  </button>
       </form>
