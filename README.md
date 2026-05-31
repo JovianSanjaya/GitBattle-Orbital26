@@ -1,12 +1,12 @@
-# Team Name:
-GitBattle
+# Team Name: GitBattle
 
 
-# Proposed Level of Achievement:
-Apollo 
+
+![alt text](./readme-asset/gitbattle.png)
 
 
-# Motivation:
+
+# Motivation
 Git is one of the most important tools in software development, yet it is also one of the most
 intimidating tools for beginners. Many students learn Git by memorizing commands such as git
 branch, git switch, and git merge without truly understanding what these commands do. As a
@@ -23,7 +23,7 @@ valuable.
 
 
 
-# Vision:
+# Vision
 We hope to build an interactive platform that helps users learn Git by challenging them to
 recreate target commit graphs using Git commands. The process of recreating the target commit
 will help the users learn and build stronger understanding of Git through hands-on practice. In
@@ -308,11 +308,25 @@ Copy it and put it in your `.env` file:
 | 27 July 2026 | Milestone 3 | Expected Outcome: Complete deployed version of GitBattle. |
 
 
+# Software Engineering Principles
+
+- **Version control**: Use Git and Github to track changes.
+
+- **Agile Methodologies**: Using sprints for iterative reviews with user stories guiding what gets built each sprint.
+
+- **Security Measures**: Sensitive information like api key is stored in `.env`.
+
 
 
 # Intended User Flow in the App
 
-![Intended User Flow in the App](./flowchart.svg)
+![Intended User Flow in the App](./readme-asset/flowchart.svg)
+
+
+# Figma Design
+
+![alt text](./readme-asset/figma.png)
+
 
 
 # Project Log
@@ -320,6 +334,7 @@ Copy it and put it in your `.env` file:
 The project work log can be accessed through the Google Sheets link below:
 
 [GitBattle Work Log](https://docs.google.com/spreadsheets/d/1s6A5wgAP8DIWsnDAzW2wp3sTJR7j-jQw_1eZiEDsW8g/edit?usp=sharing)
+
 
 
 
