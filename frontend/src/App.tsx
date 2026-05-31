@@ -6,7 +6,9 @@ import MultiplayerRoom from "./screens/multiplayer-room";
 import CreateRoom from "./screens/create-room";
 import SoundBtn from "./components/sound-btn";
 import { BrowserRouter, Route, Routes} from "react-router-dom";
-import { GoogleOAuthProvider } from "@react-oauth/google";  
+import { GoogleOAuthProvider } from "@react-oauth/google"; 
+import DocumentationPanel from "./screens/documentation_panel_front";
+import DocumentationDetail from "./screens/documentation_panel_details"; 
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/puzzle" element={<Puzzle />} />
           <Route path="/multiplayer-room" element={<MultiplayerRoom />} />
           <Route path="/create-room" element={<CreateRoom />} />
+          <Route path="/documentation" element={<DocumentationPanel />} />
+         <Route path="/documentation/:commandId" element={<DocumentationDetail />} />
         </Routes>
     </BrowserRouter>
     </GoogleOAuthProvider>
