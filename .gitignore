@@ -36,3 +36,5 @@ yarn-error.log*
 coverage/
 
 docker-compose.dev.yml
+
+GitBattle README Milestone 1.pdf

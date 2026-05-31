@@ -76,6 +76,43 @@ the meaning of Git commit graph.
 | 🔴 Not Started | Feature has not been implemented yet |
 
 
+# Tech Stack
+
+### Frontend
+- React
+- TypeScript
+- Tailwind CSS (and Pure CSS)
+- Vite
+
+### Backend
+- Node.js
+- Express
+
+### Database
+- Supabase
+
+### Authentication
+- Google OAuth
+
+### Deployment
+- Vercel
+- Render
+
+### Real-Time Communication
+- Socket.IO
+
+### API Communication
+- Axios
+
+### Version Control
+- GitHub
+
+### Containerisation
+- Docker
+- Docker Compose
+
+Note : Express is chosen over Next.js (as mentioned in the proposal) as it is more efficient for WebSocket integration and simpler to implement with Socket.IO
+
 
 # How to Run GitBattle
 
@@ -132,11 +169,7 @@ cd backend
 npm run dev
 ```
 
-Backend runs at:
-
-```text
-http://localhost:3001
-```
+Backend runs at `http://localhost:3001`
 
 ### 5. Start Frontend
 
@@ -147,16 +180,13 @@ cd frontend
 npm run dev
 ```
 
-Frontend runs at:
+Frontend runs at `http://localhost:5173`
 
-```text
-http://localhost:5173
-```
+
 
 ## Run With Docker
 
 ### 1. Create `.env`
-
 Create a `.env` file in the project root:
 
 ```env
@@ -166,38 +196,16 @@ VITE_GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
 ### 2. Start Docker
-
-## Prerequisites
-Make sure docker desktop is open.
-
-Frontend:
-
-```text
-http://localhost:5173
-```
-
-Backend:
-
-```text
-http://localhost:3001
-```
-
-## Run With Docker Hot Reload
-
-Use this during development:
+Make sure Docker Desktop is open, then run:
 
 ```bash
-docker compose -f docker-compose.dev.yml up
+docker compose up --build
 ```
 
-Rebuild if needed:
+Frontend runs at `http://localhost:5173`
 
-```bash
-docker compose -f docker-compose.dev.yml up --build
-```
+Backend runs at `http://localhost:3001`
 
-Backend changes should restart automatically with Nodemon.
-Frontend changes should hot reload after saving.
 
 ## How To Get Google Client ID
 
