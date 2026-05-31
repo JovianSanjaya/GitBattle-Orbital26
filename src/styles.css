@@ -149,3 +149,79 @@ body {
   align-self: center;
   margin-right: 5rem;
 }
+.documentation-page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 5rem;
+  background: linear-gradient(110deg, #ffc4ef 0%, #8bb9ff 100%);
+}
+
+.documentation-title {
+  text-align: center;
+  color: #1b0d47;
+  font-size: 4rem;
+  margin: 2.5rem 0 5rem;
+}
+
+.documentation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5.5rem 5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.documentation-card {
+  height: 10rem;
+  border: 2px solid #222;
+  border-radius: 1.5rem;
+  background: white;
+  color: black;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.documentation-card:hover {
+  transform: translateY(-4px);
+}
+
+.documentation-detail-title {
+  text-align: center;
+  color: #1b0d47;
+  font-size: 4rem;
+  margin: 1rem 0 2rem;
+}
+
+.documentation-detail-image {
+  display: block;
+  width: 60rem;
+  max-width: 80vw;
+  margin: 0 auto;
+  border-radius: 1.3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.documentation-cat {
+  position: absolute;
+  left: 10rem;
+  bottom: 3.5rem;
+  width: 9rem;
+  z-index: 2;
+}
+
+.documentation-bench {
+  position: absolute;
+  bottom: 3.5rem;
+  width: 13rem;
+  z-index: 2;
+}
+
+.documentation-bench-one {
+  right: 28rem;
+}
+
+.documentation-bench-two {
+  right: 12rem;
+}
