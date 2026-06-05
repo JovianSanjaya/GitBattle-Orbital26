@@ -130,8 +130,7 @@ Install these first:
 GitBattle-Orbital26/
 ├── frontend/
 ├── backend/
-├── docker-compose.yml
-└── docker-compose.dev.yml
+└── docker-compose.yml
 ```
 
 ## Run Without Docker
