@@ -1,8 +1,8 @@
-import type { Commit, GitState, Terminal} from "../../../types/git";
+import type { Commit, GitState, HeadState, Terminal} from "../../../types/git";
 
 
 
-export interface ExecuteResult {
+export interface ResultType {
     newState: GitState;
     lines: Terminal[];
 }
@@ -16,13 +16,14 @@ export type ParsedCommand = {
 };
 
 
-
+// generates a random unique ID
 function makeId(): string {
     return crypto.randomUUID();
 }
 
 
 
+// using djb2 algorithm because it's fast and easier to utilize rather than what git uses which is SHA-256
 function makeHash(str: string): string {
     let n = 5381;
 
@@ -34,7 +35,7 @@ function makeHash(str: string): string {
 }
 
 
-
+// creates a new commit object with a unique ID and hash
 export function makeCommit(message: string, parentIds: string[], id?: string): Commit {
 
     const commitId = id !== undefined ? id : makeId();
@@ -48,19 +49,19 @@ export function makeCommit(message: string, parentIds: string[], id?: string): C
 }
 
 
-
-export function makeLine(type: Terminal["type"], text: string): Terminal {
+// display the lines in the terminal after every command typed in the terminal
+export function createTerminalLine(type: Terminal["type"], text: string): Terminal {
     return { type, text, id: makeId() };
 }
 
 
-
-export function keepState(state: GitState, type: Terminal["type"], text: string): ExecuteResult {
-    return { newState: state, lines: [makeLine(type, text)] };
+// to return the state of the git state that is unchanged and return one string message. It is used when a command fails or has nothing to do
+export function keepState(state: GitState, type: Terminal["type"], text: string): ResultType {
+    return { newState: state, lines: [createTerminalLine(type, text)] };
 }
 
 
-
+// return tags object
 export function getTags(state: GitState): Record<string, string> {
 
     if (state.tags === null || state.tags === undefined) {
@@ -71,7 +72,7 @@ export function getTags(state: GitState): Record<string, string> {
 }
 
 
-
+// returns the commit ID that HEAD is currently pointing at
 export function getHeadCommitId(state: GitState): string | null {
 
     if (state.head.type === "branch") {
@@ -89,7 +90,7 @@ export function getHeadCommitId(state: GitState): string | null {
 }
 
 
-
+// returns the current branch name, or null if in detached HEAD mode
 export function getCurrentBranchName(state: GitState): string | null {
 
     if (state.head.type === "branch") {
@@ -100,7 +101,7 @@ export function getCurrentBranchName(state: GitState): string | null {
 }
 
 
-
+// get an array of the first parrent of the 
 export function getFirstParentArray(state: GitState, tipId: string): string[] {
     const chain: string[] = [];
 
@@ -126,8 +127,7 @@ export function getFirstParentArray(state: GitState, tipId: string): string[] {
 
 
 // getRef() returns Commit ID based on reference passed (can be head, branch, tag, hash, and relative ( ~ and ^)) 
-
-function getHead(state: GitState, ref: string): string | null {
+function getCommitIdHead(state: GitState, ref: string): string | null {
 
     if (ref === "HEAD") {
         return getHeadCommitId(state);
@@ -138,7 +138,7 @@ function getHead(state: GitState, ref: string): string | null {
 
 
 
-function getBranch(state: GitState, ref: string): string | null {
+function getCommitIdBranch(state: GitState, ref: string): string | null {
     const commitId = state.branches[ref];
 
     if (commitId === undefined || commitId === null) {
@@ -150,7 +150,7 @@ function getBranch(state: GitState, ref: string): string | null {
 
 
 
-function getTag(state: GitState, ref: string): string | null {
+function getCommitIdTag(state: GitState, ref: string): string | null {
     const tags = getTags(state);
 
     const commitId = tags[ref];
@@ -165,7 +165,7 @@ function getTag(state: GitState, ref: string): string | null {
 
 
 
-function getHash(state: GitState, ref: string): string | null {
+function getCommitIdHash(state: GitState, ref: string): string | null {
 
     for (const id in state.commits) {
 
@@ -183,7 +183,7 @@ function getHash(state: GitState, ref: string): string | null {
 
 
 
-function getRelative(state: GitState, ref: string): string | null {
+function getCommitIdRelative(state: GitState, ref: string): string | null {
     let split = -1;
 
     for (let i = 0; i < ref.length; i++) {
@@ -271,33 +271,110 @@ export function getRef(state: GitState, ref: string): string | null {
         return null;
     }
 
-    const head = getHead(state, ref);
+    const head = getCommitIdHead(state, ref);
     if (head) {
         return head;
     }
 
-    const branch = getBranch(state, ref);
+    const branch = getCommitIdBranch(state, ref);
     if (branch){
         return branch;
     }
 
-    const tag = getTag(state, ref);
+    const tag = getCommitIdTag(state, ref);
     if (tag){
         return tag;
     } 
 
-    const relative = getRelative(state, ref);
+    const relative = getCommitIdRelative(state, ref);
     if (relative) {
         return relative;
     }
 
-    const hash = getHash(state, ref);
+    const hash = getCommitIdHash(state, ref);
     if (hash){
         return hash;
     }
 
     return null;
 }
+
+
+
+export function getAncestorsSet(commits: Record<string, Commit>, startId: string): Set<string> {
+    const visited = new Set<string>();
+    const queue = [startId];
+
+    while(queue.length > 0){
+        const id = queue.shift()!;
+        if(visited.has(id)){
+            continue;
+        }
+        visited.add(id);
+
+        const commit = commits[id];
+        if(!commit){
+            continue;
+        }
+
+        for(const p of commit.parentIds){
+            queue.push(p);
+        }
+    }
+
+    return visited;
+}
+
+export function isAncestor(commits: Record<string, Commit>, ancId: string, descId: string): boolean{
+
+    const anc = getAncestorsSet(commits, descId);
+    return anc.has(ancId);
+
+}
+
+
+export function getCommonAncestor(commits: Record<string, Commit>, firstId: string, secId: string): string | null{
+
+    const firstAnc = getAncestorsSet(commits, firstId);
+    const secAnc = getAncestorsSet(commits, secId);
+
+    for(const id of firstAnc){
+        if(secAnc.has(id)){
+            return id;
+        }
+    }
+
+    return null;
+
+}
+
+
+// The rule is not very strict for the name of the branch
+export function isCorrectBranchName(name: string): boolean{
+    if(!name){
+        return false;    
+    }
+
+    for(const char of name){
+        const isLetter = (char >= "a" && char <= "z") || (char >= "A" && char <= "Z");
+        const isDigit = (char >= "0" && char <= "9");
+
+        if(!isLetter && !isDigit){
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
+
+
+export function moveHead(state: GitState, newHead: HeadState): GitState{
+    return {...state, head: newHead, previousHead: state.head};
+}
+
+
 
 
 
