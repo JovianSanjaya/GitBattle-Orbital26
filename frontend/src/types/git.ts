@@ -16,11 +16,11 @@ export type HeadState = {type : "branch", name: string} | {type: "detached", com
 
 // For Git State
 export interface GitState{
-    commits: Record<string, Commit>,
-    branches: Record<string, string>,
-    tags?: Record<string, string>,
-    head: HeadState,
-    previousHead?: HeadState
+    commits: Record<string, Commit>, // <commit id, commit object>
+    branches: Record<string, string>, // <branch name , latest commit>
+    tags?: Record<string, string>, // <tag name, commit id>
+    head: HeadState, // current head position
+    previousHead?: HeadState // previos head position
 }
 
 

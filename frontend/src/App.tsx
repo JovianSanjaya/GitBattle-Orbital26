@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-  <Route path="/puzzle" element={<Puzzle />} />
+          <Route path="/puzzle" element={<Puzzle />} />
           <Route path="/multiplayer-room" element={<MultiplayerRoom />} />
           <Route path="/create-room" element={<CreateRoom />} />
           <Route path="/documentation" element={<DocumentationPanel />} />
