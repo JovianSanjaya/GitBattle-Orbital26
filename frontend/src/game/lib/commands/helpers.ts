@@ -24,7 +24,7 @@ function makeId(): string {
 
 
 // using djb2 algorithm because it's fast and easier to utilize rather than what git uses which is SHA-256
-// Id create randomg id while hash = id + message that consist of 7 characters
+// Id create random id while hash = id + message that consist of 7 characters
 function makeHash(str: string): string {
     let n = 5381;
 
