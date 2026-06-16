@@ -4,7 +4,7 @@
 
 import type { GitState } from "../../../types/git";
 import type { ResultType } from "./helpers";
-import { createTerminalLine, getCurrentBranchName, getHeadCommitId, keepState , isCorrectBranchName} from "./helpers";
+import { createTerminalLine, getCurrentBranchName, getHeadCommitId, keepState , isCorrectBranchName, getRef} from "./helpers";
 import { moveHead } from "./helpers";   
 
 
@@ -80,7 +80,7 @@ function createBranch(state: GitState, branchName: string): ResultType{
     }
 
     if(state.branches[branchName] !== undefined){
-        return keepState(state, "error", `fatal: a branch '${branchName}' already exists`);
+        return keepState(state, "error", `error: a branch '${branchName}' already exists`);
     }
 
     const headId = getHeadCommitId(state);
@@ -170,20 +170,55 @@ function switchToPrevious(state: GitState): ResultType{
 
 function checkoutCommits(state: GitState, commitId: string): ResultType{
 
-    return {
-        newState: {...state},
-        lines: [],
+    const ref = getRef(state, commitId);
+    
+    if(!ref || !state.commits[ref]){
+         return keepState(
+        state,
+        "error",
+        `error: pathspec '${commitId}' did not match any commit.\n`
+        );
     }
+
+    const commit = state.commits[commitId];
+    return {
+        newState: moveHead(state, { type: "detached", commitId }),
+        lines: [
+        createTerminalLine("output", `HEAD is now at ${commit.hash} ${commit.message}`),
+        createTerminalLine(
+            "info",
+            "You are in 'detached HEAD' mode. Commits you make will not belong to any branch.",
+        ),
+        ],
+    };
 }
 
 
 function createAndSwitch(state: GitState, branchName: string): ResultType{
 
+    if(!branchName){
+        return keepState(state, "error", "error: branch name requred after the flag");
+    }
+
+    if(!isCorrectBranchName(branchName)){
+        return keepState(state, "error", `error:  ${branchName} is not a valid branch name `);
+    }
+
+    const headId = getHeadCommitId(state);
+    if(!headId){
+        return keepState(state,"error", "error: no commits yet, cannot create a branch");
+    }
+
+    const newState = moveHead(
+        { ...state, branches: { ...state.branches, [branchName]: headId } },
+        { type: "branch", name: branchName },
+    );
 
     return {
-        newState: {...state},
-        lines: [],
-    }
+        newState,
+        lines: [createTerminalLine("success", `Switched to a new branch '${branchName}'`)],
+    };
+
 }
 
 
