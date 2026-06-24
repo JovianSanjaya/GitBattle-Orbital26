@@ -1,108 +1,101 @@
-
-
 // commands include git branch, git checkout, git switch
 
 import type { GitState } from "../../../types/git";
 import type { ResultType } from "./helpers";
-import { createTerminalLine, getCurrentBranchName, getHeadCommitId, keepState , isCorrectBranchName, getRef} from "./helpers";
-import { moveHead } from "./helpers";   
-
-
-
+import { createTerminalLine, getCurrentBranchName, getHeadCommitId, keepState, isCorrectBranchName, getRef } from "./helpers";
+import { moveHead } from "./helpers";
 
 // git branch
-export function handleBranch(state: GitState, args: string[]): ResultType{
-    if(args.length == 0){
+export function handleBranch(state: GitState, args: string[]): ResultType {
+    if (args.length == 0) {
         return listAllBranches(state);
     }
 
-    if(args[0] === "-d" || args[0] === "--delete"){
+    if (args[0] === "-d" || args[0] === "--delete") {
         return deleteBranch(state, args[1]);
     }
 
     return createBranch(state, args[0]);
 }
 
-
 // git branch helper
-function listAllBranches(state: GitState): ResultType{
+function listAllBranches(state: GitState): ResultType {
     const currBranch = getCurrentBranchName(state);
     const names = Object.keys(state.branches).sort() as Array<keyof GitState["branches"]>;
 
-    if(names.length === 0){
+    if (names.length === 0) {
         return keepState(state, "info", "(no branches yet)");
     }
 
     return {
         newState: state,
         lines: names.map(
-            (name) => createTerminalLine("output", `${name  === currBranch ? "* " : "  "} ${name}`),
+            (name) => createTerminalLine("output", `${name === currBranch ? "* " : "  "} ${name}`),
         ),
-    }
+    };
 }
 
 // git branch -d
-function deleteBranch(state: GitState, branchName: string): ResultType{
-    if(!branchName){
+function deleteBranch(state: GitState, branchName: string): ResultType {
+    if (!branchName) {
         return keepState(state, "error", "error: branch name required");
     }
 
-    if(state.branches[branchName] === undefined){
+    if (state.branches[branchName] === undefined) {
         return keepState(state, "error", `error: branch ${branchName} not found`);
     }
 
-    if(state.head.type === "branch" && state.head.name === branchName){
+    if (state.head.type === "branch" && state.head.name === branchName) {
         return keepState(
             state,
             "error",
             `error:  cannot delete branch '${branchName}', it is currently checkout out. \n ` + `Switch to another branch first, then delete.`,
-        )
+        );
     }
 
-    const branches = {...state.branches};
+    const branches = { ...state.branches };
+
     delete branches[branchName];
-    return {
-        newState: {...state, branches},
-        lines: [createTerminalLine("success",   `Deleted branch '${branchName}'`)],
-    }
 
+    return {
+        newState: { ...state, branches },
+        lines: [createTerminalLine("success", `Deleted branch '${branchName}'`)],
+    };
 }
 
-
 // git branch <name>
-function createBranch(state: GitState, branchName: string): ResultType{
-    if(!isCorrectBranchName(branchName)){
+function createBranch(state: GitState, branchName: string): ResultType {
+    if (!isCorrectBranchName(branchName)) {
         return keepState(
             state,
             "error",
             `error: '${branchName}' is not a valid branch name. \n ` + "Branch name may only digits and letters",
-        )
+        );
     }
 
-    if(state.branches[branchName] !== undefined){
+    if (state.branches[branchName] !== undefined) {
         return keepState(state, "error", `error: a branch '${branchName}' already exists`);
     }
 
     const headId = getHeadCommitId(state);
 
-    if(!headId){
+    if (!headId) {
         return keepState(state, "error", "error: no commits yet so cannot create a branch");
     }
 
     return {
-        newState: {...state, branches:{...state.branches, [branchName] : headId}},
-        lines: [createTerminalLine("success",  `Created branch '${branchName}'`)],
-    }
-
+        newState: { ...state, branches: { ...state.branches, [branchName]: headId } },
+        lines: [createTerminalLine("success", `Created branch '${branchName}'`)],
+    };
 }
 
 //git checkout
-function handleCheckout(state: GitState, args: string[]): ResultType{
-    if(!args[0]){
-        return keepState(state, "error", "error: branch name is required")
+export function handleCheckout(state: GitState, args: string[]): ResultType {
+    if (!args[0]) {
+        return keepState(state, "error", "error: branch name is required");
     }
 
-    if(args[0] === "-"){
+    if (args[0] === "-") {
         return switchToPrevious(state);
     }
 
@@ -110,7 +103,7 @@ function handleCheckout(state: GitState, args: string[]): ResultType{
         return createAndSwitch(state, args[1] ?? "");
     }
 
-    if(state.branches[args[0]] !== undefined){
+    if (state.branches[args[0]] !== undefined) {
         return checkoutToBranch(state, args[0]);
     }
 
@@ -118,11 +111,9 @@ function handleCheckout(state: GitState, args: string[]): ResultType{
     return checkoutCommits(state, args[0]);
 }
 
-
 // git checkout helpers
-function checkoutToBranch(state: GitState, branchName: string): ResultType{
-
-    if(state.branches[branchName] === undefined){
+function checkoutToBranch(state: GitState, branchName: string): ResultType {
+    if (state.branches[branchName] === undefined) {
         return keepState(
             state,
             "error",
@@ -130,83 +121,78 @@ function checkoutToBranch(state: GitState, branchName: string): ResultType{
         );
     }
 
-    return{
+    return {
         newState: moveHead(state, { type: "branch", name: branchName }),
         lines: [createTerminalLine("success", `Switched to branch '${branchName}'`)],
-    }
+    };
 }
 
-
-function switchToPrevious(state: GitState): ResultType{
-    if(!state.previousHead){
+function switchToPrevious(state: GitState): ResultType {
+    if (!state.previousHead) {
         return keepState(
             state,
             "error",
             "error: cannot 'git checkout -' since there is no branch to switch to "
-        )
+        );
     }
 
     const prevHead = state.previousHead;
 
-    if(prevHead.type === "branch" && state.branches[prevHead.name] === undefined){
+    if (prevHead.type === "branch" && state.branches[prevHead.name] === undefined) {
         return keepState(
             state,
             "error",
             `error: previous branch ${prevHead.name} is not found`
-            
-        )
+        );
     }
 
     // The commitId shouldn't be produced 7 chars from beginning since two commits may have first 7 chars the same when comparing. So only slice when we want to show.
     const label = prevHead.type === "branch" ? prevHead.name : `${prevHead.commitId.slice(0, 7)} (detached)`;
 
     return {
-        newState: {...state, },
+        newState: { ...state },
         lines: [createTerminalLine("success", `Successfully switched to branch ${label}`)],
-    }
+    };
 }
 
-
-
-function checkoutCommits(state: GitState, commitId: string): ResultType{
-
+function checkoutCommits(state: GitState, commitId: string): ResultType {
     const ref = getRef(state, commitId);
-    
-    if(!ref || !state.commits[ref]){
-         return keepState(
-        state,
-        "error",
-        `error: pathspec '${commitId}' did not match any commit.\n`
+
+    if (!ref || !state.commits[ref]) {
+        return keepState(
+            state,
+            "error",
+            `error: pathspec '${commitId}' did not match any commit.\n`
         );
     }
 
     const commit = state.commits[commitId];
+
     return {
         newState: moveHead(state, { type: "detached", commitId }),
         lines: [
-        createTerminalLine("output", `HEAD is now at ${commit.hash} ${commit.message}`),
-        createTerminalLine(
-            "info",
-            "You are in 'detached HEAD' mode. Commits you make will not belong to any branch.",
-        ),
+            createTerminalLine("output", `HEAD is now at ${commit.hash} ${commit.message}`),
+            createTerminalLine(
+                "info",
+                "You are in 'detached HEAD' mode. Commits you make will not belong to any branch.",
+            ),
         ],
     };
 }
 
-
-function createAndSwitch(state: GitState, branchName: string): ResultType{
-
-    if(!branchName){
+function createAndSwitch(state: GitState, branchName: string): ResultType {
+    if (!branchName) {
         return keepState(state, "error", "error: branch name requred after the flag");
     }
 
-    if(!isCorrectBranchName(branchName)){
+    if (!isCorrectBranchName(branchName)) {
         return keepState(state, "error", `error:  ${branchName} is not a valid branch name `);
     }
 
     const headId = getHeadCommitId(state);
-    if(!headId){
-        return keepState(state,"error", "error: no commits yet, cannot create a branch");
+
+    if (!headId) {
+        return keepState(state, "error", "error: no commits yet, cannot create a branch");
     }
 
     const newState = moveHead(
@@ -218,7 +204,4 @@ function createAndSwitch(state: GitState, branchName: string): ResultType{
         newState,
         lines: [createTerminalLine("success", `Switched to a new branch '${branchName}'`)],
     };
-
 }
-
-
