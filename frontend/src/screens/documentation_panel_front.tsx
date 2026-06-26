@@ -5,10 +5,12 @@ import cat from "../assets/cat.png";
 import bench from "../assets/bench.png";
 
 function DocumentationPanel() {
+
   const navigate = useNavigate();
 
   return (
     <section className="documentation-page">
+
       <BackBtn />
 
       <h1 className="documentation-title font-press-start">
@@ -16,7 +18,9 @@ function DocumentationPanel() {
       </h1>
 
       <div className="documentation-grid">
+
         {documentationData.map((doc) => (
+
           <button
             key={doc.id}
             className="documentation-card font-press-start"
@@ -24,20 +28,24 @@ function DocumentationPanel() {
           >
             {doc.title}
           </button>
+
         ))}
       </div>
 
       <img className="documentation-cat" src={cat} alt="cat" />
+
       <img
         className="documentation-bench documentation-bench-one"
         src={bench}
         alt="bench"
       />
+
       <img
         className="documentation-bench documentation-bench-two"
         src={bench}
         alt="bench"
       />
+
     </section>
   );
 }

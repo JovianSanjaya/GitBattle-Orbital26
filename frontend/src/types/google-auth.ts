@@ -1,9 +1,9 @@
-
 type GoogleUser = {
   id: string;
   email: string;
   name: string;
-  pict: string;
+  picture?: string;
+  pict?: string;
 };
 
 export type GoogleAuthResponse = {
