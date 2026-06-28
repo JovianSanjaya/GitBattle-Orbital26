@@ -13,8 +13,10 @@ import DocumentationPanel from "./screens/documentation_panel_front";
 import DocumentationDetail from "./screens/documentation_panel_details";
 
 function App() {
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || "missing-google-client-id";
+
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+    <GoogleOAuthProvider clientId={googleClientId}>
       <GoogleAuthProvider>
         <BrowserRouter>
           <SoundBtn />

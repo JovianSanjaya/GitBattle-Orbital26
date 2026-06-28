@@ -20,7 +20,7 @@ body {
   min-width: 20rem;
   background:
     radial-gradient(circle at 35% 34%, rgba(255, 255, 255, 0.46), transparent 28%),
-    linear-gradient(105deg, #ffc1e6 0%, #dfcff7 45%, #82b6ff 100%);
+    linear-gradient(90deg, #ffc1e6 0%, #dfcff7 45%, #82b6ff 100%);
 }
 
 /* for every page */
@@ -231,7 +231,7 @@ body::after {
 .hero-title {
   font-size: 3rem;
   line-height: 1.05;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: #2a1a4a;
   margin: 0 0 1.2rem;
 }
@@ -1555,8 +1555,9 @@ body::after {
 .documentation-page {
   min-height: 100vh;
   position: relative;
-  overflow: hidden;
-  padding: 2rem 5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 2rem clamp(1.5rem, 4vw, 5rem);
   background: linear-gradient(110deg, #ffc4ef 0%, #8bb9ff 100%);
 }
 
@@ -1564,23 +1565,52 @@ body::after {
   text-align: center;
   color: #1b0d47;
   font-size: 4rem;
-  margin: 2.5rem 0 5rem;
+  margin: 2.5rem 0 3.5rem;
+}
+
+.documentation-sections {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+.documentation-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.documentation-section-title {
+  color: #1b0d47;
+  font-size: 1.4rem;
+  margin: 0;
 }
 
 .documentation-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5.5rem 5rem;
-  position: relative;
-  z-index: 2;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.2rem 2.2rem;
 }
 
 .documentation-card {
+  width: 100%;
+  min-height: 4rem;
+  padding: 0.85rem 1.2rem;
   border: 2px solid #222;
-  border-radius: 1.5rem;
+  border-radius: 999px;
   background: white;
   color: black;
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  line-height: 1.25;
   cursor: pointer;
 }
 
@@ -1595,29 +1625,191 @@ body::after {
   margin: 1rem 0 2rem;
 }
 
-.documentation-detail-image {
-  display: block;
-  width: 60rem;
-  max-width: 80vw;
-  margin: 0 auto;
-  border-radius: 1.3rem;
+.documentation-lesson-card {
   position: relative;
   z-index: 2;
-  height:35rem;
+  width: min(58rem, 92vw);
+  margin: 0 auto 7rem;
+  padding: 1.2rem;
+  border-radius: 1.5rem;
+  background: #fff;
+  color: #1b0d47;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.documentation-lesson-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.documentation-lesson-heading {
+  margin: 0;
+  color: #6f6a7e;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.documentation-lesson-section p,
+.documentation-lesson-section li {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.documentation-lesson-section ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.documentation-graph-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.documentation-graph {
+  min-height: 15rem;
+  padding: 0.9rem 1rem;
+  border: 2px solid #dedbd3;
+  border-radius: 0.6rem;
+  background: #f8f7f1;
+  overflow: hidden;
+}
+
+.documentation-graph-title {
+  margin: 0 0 1rem;
+  color: #6f6a7e;
+  font-size: 0.8rem;
+}
+
+.documentation-graph-row {
+  display: flex;
+  min-height: 11rem;
+  align-items: flex-start;
+}
+
+.documentation-graph-step {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.documentation-node {
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 3px solid #2b86d8;
+  border-radius: 50%;
+  background: #d9ecff;
+  color: #1b0d47;
+  display: grid;
+  place-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.documentation-node-new {
+  border-color: #1f9b6d;
+  background: #daf4df;
+}
+
+.documentation-node-muted {
+  border-color: #a3a0aa;
+  background: #ebe9ee;
+  opacity: 0.55;
+}
+
+.documentation-node-message {
+  width: 8rem;
+  margin: 0.5rem 0 0;
+  color: #1b0d47;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.documentation-node-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+  margin-top: 0.45rem;
+}
+
+.documentation-node-label {
+  min-width: 4.2rem;
+  padding: 0.22rem 0.55rem;
+  border: 2px solid #1b0d47;
+  border-radius: 0.45rem;
+  background: #fff;
+  color: #1b0d47;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.documentation-node-label-head {
+  border-color: #1b0d47;
+  background: #15906f;
+  color: #fff;
+}
+
+.documentation-node-label-tag {
+  border-color: #8a61d7;
+  background: #efe7ff;
+}
+
+.documentation-node-label-detached {
+  border-color: #b67821;
+  background: #fff3d4;
+}
+
+.documentation-arrow {
+  position: absolute;
+  top: 1.55rem;
+  left: calc(50% + 1.8rem);
+  right: calc(-50% + 1.8rem);
+  height: 0.18rem;
+  background: #777;
+}
+
+.documentation-arrow::after {
+  content: "";
+  position: absolute;
+  right: -0.1rem;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-top: 0.18rem solid #777;
+  border-right: 0.18rem solid #777;
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .documentation-cat {
   position: absolute;
   left: 10rem;
-  bottom: 3.5rem;
-  width: 9rem;
+  bottom: 3.7rem;
+  width: 7.2rem;
   z-index: 2;
 }
 
 .documentation-bench {
   position: absolute;
-  bottom: 3.5rem;
-  width: 13rem;
+  bottom: 3.6rem;
+  width: 10.5rem;
   z-index: 2;
 }
 

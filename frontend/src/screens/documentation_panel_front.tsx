@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import BackBtn from "../components/back-btn";
-import {documentationData} from "../data/documentation_panel_data";
+import { documentationSections } from "../data/documentation_panel_data";
 import cat from "../assets/cat.png";
 import bench from "../assets/bench.png";
 
@@ -17,19 +17,37 @@ function DocumentationPanel() {
         Documentation Panel
       </h1>
 
-      <div className="documentation-grid">
+      <div className="documentation-sections">
 
-        {documentationData.map((doc) => (
+        {documentationSections.map((section) => (
 
-          <button
-            key={doc.id}
-            className="documentation-card font-press-start"
-            onClick={() => navigate(`/documentation/${doc.id}`)}
-          >
-            {doc.title}
-          </button>
+          <section className="documentation-section" key={section.title}>
+
+            <h2 className="documentation-section-title font-press-start">
+              {section.title}
+            </h2>
+
+            <div className="documentation-grid">
+
+              {section.items.map((doc) => (
+
+                <button
+                  key={doc.id}
+                  className="documentation-card font-press-start"
+                  type="button"
+                  onClick={() => navigate(`/documentation/${doc.id}`)}
+                >
+                  {doc.title}
+                </button>
+
+              ))}
+
+            </div>
+
+          </section>
 
         ))}
+
       </div>
 
       <img className="documentation-cat" src={cat} alt="cat" />

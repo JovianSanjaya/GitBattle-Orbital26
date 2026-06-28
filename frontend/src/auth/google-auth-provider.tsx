@@ -22,6 +22,10 @@ type GoogleAuthContextValue = {
 
 const GoogleAuthContext = createContext<GoogleAuthContextValue | null>(null);
 
+
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+
 function normalizeUser(user: GoogleUser) {
   return {
     ...user,
@@ -42,7 +46,7 @@ function getSavedUser() {
 export function GoogleAuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<GoogleUser | null>(() => getSavedUser());
 
-  const loginWithGoogle = useGoogleLogin({
+  const startGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       const login = await axios.post<GoogleAuthResponse>(`${import.meta.env.VITE_API_URL}/auth/google`, {
         acc_token: tokenResponse.access_token,
@@ -63,6 +67,17 @@ export function GoogleAuthProvider({ children }: { children: ReactNode }) {
     },
     onError: (error) => console.log("Login Failed:", error),
   });
+
+
+  function loginWithGoogle() {
+    if (!googleClientId) {
+      alert("Google login is not ready. Please set VITE_GOOGLE_CLIENT_ID.");
+      return;
+    }
+
+    startGoogleLogin();
+  }
+
 
   function logout() {
     localStorage.removeItem("token");

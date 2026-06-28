@@ -178,7 +178,7 @@ export const PUZZLES: Puzzle[] = [
       "The graph shape should not grow; only the labels should change.",
     ],
 
-    docsHighlight: ["git switch", "git checkout"],
+    docsHighlight: ["git checkout"],
   },
 
   {
@@ -224,7 +224,7 @@ export const PUZZLES: Puzzle[] = [
       "After the feature work exists, HEAD should return to main.",
     ],
 
-    docsHighlight: ["git switch", "git checkout", "git commit"],
+    docsHighlight: ["git checkout", "git commit"],
   },
 
   // Intermediate Puzzles
@@ -308,7 +308,7 @@ export const PUZZLES: Puzzle[] = [
       "After the extra branch label is gone, move main back by the number of unwanted commits.",
     ],
 
-    docsHighlight: ["git switch", "git branch", "git reset"],
+    docsHighlight: ["git checkout", "git branch", "git reset"],
   },
 
   {
@@ -369,7 +369,7 @@ export const PUZZLES: Puzzle[] = [
       "The final graph should keep the merge commit and remove the old feature label.",
     ],
 
-    docsHighlight: ["git switch", "git merge", "git branch"],
+    docsHighlight: ["git checkout", "git merge", "git branch"],
   },
 
   // Advanced Puzzles
