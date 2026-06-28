@@ -1,0 +1,45 @@
+const gitHelpData = [
+  ["info", "Available commands:"],
+  ["output", ""],
+
+  ["output", "  ── Saving work ──────────────────────────────────"],
+  ["output", '  git commit -m "message"'],
+  ["output", '  git commit --amend -m "new message"'],
+  ["output", ""],
+
+  ["output", "  ── Branches ───────────────────────────"],
+  ["output", "  git branch"],
+  ["output", "  git branch <name>"],
+  ["output", "  git branch -d <name>"],
+  ["output", ""],
+
+  ["output", "  ── Switching branches ───────────────────────────"],
+  ["output", "  git checkout <branch>"],
+  ["output", "  git checkout -b <branch>"],
+  ["output", "  git checkout -"],
+  ["output", "  git checkout <commit>"],
+  ["output", ""],
+
+  ["output", "  ── Combining work ───────────────────────────────"],
+  ["output", "  git merge <branch>"],
+  ["output", "  git rebase <branch>"],
+  ["output", ""],
+
+  ["output", "  ── Undoing work ─────────────────────────────────"],
+  ["output", "  git reset --hard HEAD~n"],
+  ["output", "  git revert <commit>"],
+  ["output", ""],
+
+  ["output", "  ── Tags ─────────────────────────────────────────"],
+  ["output", "  git tag"],
+  ["output", "  git tag <name>"],
+  ["output", ""],
+
+  ["output", "  ── Inspecting ───────────────────────────────────"],
+  ["output", "  git status"],
+  ["output", "  git log --oneline <ref>"],
+  ["output", "  git describe <ref>"],
+  ["output", "  Note ref means a reference to a commit. It can be HEAD, branch name, commit, HEAD~n, etc"],
+];
+
+export { gitHelpData };

@@ -1,0 +1,1822 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-press-start: 'Press Start 2P', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+  --grass-height: 4rem;
+}
+
+body {
+  margin: 0;
+  min-width: 20rem;
+  background:
+    radial-gradient(circle at 35% 34%, rgba(255, 255, 255, 0.46), transparent 28%),
+    linear-gradient(90deg, #ffc1e6 0%, #dfcff7 45%, #82b6ff 100%);
+}
+
+/* for every page */
+body::after {
+  content: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100%;
+  height: 3.4rem;
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-size: auto 3.6rem;
+}
+
+
+.landing{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* for exception like choosing mode only */
+.grass-tile-top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3.4rem;
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-size: auto 3.6rem;
+  transform: scaleY(-1);
+}
+
+/* for exception like choosing mode only  */
+.grass-tile{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  height: 3.4rem;
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-size: auto 3.6rem;
+}
+
+
+
+
+.landing-header {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.2rem 0;
+  margin-top: 0.5rem;
+}
+
+.header-divider {
+  position: relative;
+  z-index: 3;
+  height: 2px;
+  margin: 0.8rem 1.2rem 0;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 1000px;
+}
+
+.font-press-start {
+  font-family: var(--font-press-start);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.logo-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #2a1a4a;
+  cursor: pointer;
+}
+
+.landing-logo {
+  width: 7rem;
+  height: 5rem;
+  display: block;
+}
+
+.landing-title {
+  font-size: 1.3rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1.7rem;
+}
+
+.header-profile {
+  position: relative;
+}
+
+.header-profile-button {
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0;
+  border: 1px solid #000;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.header-profile-menu {
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  z-index: 4;
+  width: 16rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  background: #fff;
+  color: #2a1a4a;
+  text-align: center;
+  box-shadow: 0 0.18rem 0.32rem rgba(0, 0, 0, 0.25);
+}
+
+.header-profile-menu strong {
+  font-size: 0.9rem;
+}
+
+.header-profile-menu span {
+  font-size: 0.75rem;
+  word-break: break-word;
+}
+
+.header-profile-menu button {
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.5rem;
+}
+
+.header-profile-menu .profile-picture {
+  width: 4.5rem;
+  height: 4.5rem;
+  flex-shrink: 0;
+}
+
+.profile-picture {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-picture-fallback {
+  background: #2a1a4a;
+  color: #fff;
+  font-family: var(--font-press-start);
+  font-size: 0.9rem;
+}
+
+.header-btn {
+  font-size: 0.7rem;
+  padding: 0.55rem 2rem;
+  min-width: 10.625rem;
+  height: 2.75rem;
+  border-radius: 1rem;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  line-height: 1;
+}
+
+.landing-intro-hero {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100rem;
+  text-align: center;
+  transform: translateY(-2.7rem);
+}
+
+.hero-title {
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: #2a1a4a;
+  margin: 0 0 1.2rem;
+}
+
+.hero-subtitle {
+  font-size: 0.85rem;
+  color: #2a1a4a;
+  margin: 0 0 1.6rem;
+}
+
+.landing-decor,
+.mode-decor {
+  position: absolute;
+  z-index: 1;
+  image-rendering: pixelated;
+  pointer-events: none;
+  user-select: none;
+}
+
+.landing-bench {
+  left: clamp(1.8rem, 3.4vw, 4rem);
+  bottom: calc(var(--grass-height) - 1.35rem);
+  width: clamp(10rem, 17vw, 21rem);
+}
+
+.landing-tree {
+  right: clamp(1.4rem, 3.2vw, 3.7rem);
+  bottom: calc(var(--grass-height) - 1.45rem);
+  width: clamp(10.5rem, 16vw, 20rem);
+}
+
+.mode-section{
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 7rem;
+  position: relative;
+}
+
+.mode-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 2.7rem;
+}
+
+.mode-btn{
+  font-size: 1.15rem;
+  width: 40rem;
+  height: 8rem;
+  border-radius: 3.1rem;
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em;
+}
+
+.mode-title {
+  font-size: 2.5rem;
+  color: #2a1a4a;
+  text-align: center;
+  margin: 0;
+  align-self: center;
+  margin-right: 5rem;
+}
+
+.mode-bus {
+  right: clamp(3rem, 8vw, 10rem);
+  bottom: calc(var(--grass-height) - 1.15rem);
+  width: clamp(13rem, 24vw, 22rem);
+}
+
+.mode-cloud-left,
+.mode-cloud-right {
+  z-index: 0;
+}
+
+.mode-cloud-left {
+  left: -1.5rem;
+  top: 3.8rem;
+  width: clamp(10rem, 24vw, 22rem);
+}
+
+.mode-cloud-right {
+  right: 2rem;
+  top: 3.7rem;
+  width: clamp(10rem, 23vw, 21rem);
+}
+
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2.5rem 1.5rem;
+  position: relative;
+  isolation: isolate;
+}
+
+.auth-screen::after,
+.multiplayer::after,
+.room-page::after,
+.documentation-page::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  height: var(--grass-height);
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: auto var(--grass-height);
+  pointer-events: none;
+}
+
+.auth-screen > *,
+.multiplayer > *,
+.room-page > *,
+.documentation-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.room-page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem calc(var(--grass-height) + 3rem);
+  overflow: hidden;
+}
+
+.room-page .back-btn {
+  position: absolute;
+  left: clamp(2rem, 5vw, 5.5rem);
+  top: clamp(1.5rem, 4vw, 3rem);
+  z-index: 4;
+}
+
+.room-card {
+  width: min(36rem, 92vw);
+  min-height: 27rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 3.6rem 2.4rem;
+  border: 1px solid #000;
+  border-radius: 1.1rem;
+  background: #fff;
+  color: #2a1a4a;
+  box-shadow: 0 0.18rem 0.34rem rgba(0, 0, 0, 0.18);
+}
+
+.room-status {
+  margin: 0 0 1.35rem;
+  color: #158e72;
+  font-size: 0.45rem;
+  line-height: 1;
+}
+
+.room-card h1 {
+  margin: 0 0 1.7rem;
+  color: #2a1a4a;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.room-code-display {
+  margin: 0 0 2.45rem;
+  color: #1b0d47;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  line-height: 1;
+}
+
+.room-player-list {
+  width: 100%;
+  margin-bottom: 1.55rem;
+}
+
+.room-player {
+  min-height: 4.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #000;
+  border-radius: 0.65rem;
+  background: #f9fbff;
+}
+
+.room-player-identity {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.room-player-identity .profile-picture {
+  width: 2.2rem;
+  height: 2.2rem;
+  flex-shrink: 0;
+}
+
+.room-player-name {
+  overflow: hidden;
+  color: #2a1a4a;
+  font-size: 0.58rem;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.room-player-role {
+  flex-shrink: 0;
+  color: #2a1a4a;
+  font-family: var(--font-press-start);
+  font-size: 0.85rem;
+}
+
+.room-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.room-action-btn {
+  min-width: 5rem;
+  height: 2.8rem;
+  border: 1px solid #000;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #2a1a4a;
+  cursor: pointer;
+  font-size: 0.52rem;
+  line-height: 1;
+}
+
+.room-action-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.auth-screen .back-btn {
+  position: absolute;
+  left: clamp(1rem, 5vw, 5rem);
+  top: clamp(1rem, 4vw, 2.5rem);
+  z-index: 4;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 29rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-title {
+  margin: 0 0 2.25rem;
+  text-align: center;
+  font-size: 3rem;
+  color: #2a1a4a;
+}
+
+.auth-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.auth-avatar-btn {
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  border: 2px dashed #aaa;
+  border-radius: 50%;
+  background: #f4f4f8;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.auth-avatar-btn:hover {
+  border-color: #7c3aed;
+}
+
+.auth-avatar-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.auth-avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #aaa;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.auth-avatar-hint {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: #777;
+}
+
+.auth-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.7rem;
+  color: #6b6470;
+  font-family: var(--font-press-start);
+}
+
+.auth-input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid #000;
+  border-radius: 0.75rem;
+  background: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  font-family: Arial, sans-serif;
+}
+
+.auth-error {
+  margin: 0 0 1.25rem;
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #b73333;
+}
+
+.auth-button {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid #000;
+  border-radius: 3.1rem;
+  background: #fff;
+  color: #000;
+  font-size: 0.6rem;
+  line-height: 1.35;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.auth-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-press-start);
+
+
+}
+
+.auth-divider span {
+  height: 1px;
+  flex: 1;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.auth-divider p {
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.google-logo {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+}
+
+.auth-link-button {
+  margin-top: 1.25rem;
+  border: none;
+  background: transparent;
+  color: #2a1a4a;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: var(--font-press-start);
+
+}
+
+
+.puzzle{
+  min-height: 100vh;
+  position: relative;
+  padding: clamp(9rem, 16vh, 10.5rem) clamp(1.25rem, 5vw, 5rem) calc(var(--grass-height) + 3rem);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  isolation: isolate;
+}
+
+.puzzle::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  height: var(--grass-height);
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-position: bottom left;
+  background-size: auto var(--grass-height);
+  pointer-events: none;
+}
+
+.puzzle-topbar {
+  position: absolute;
+  top: 2.5rem;
+  left: 5rem;
+  right: 5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 5;
+}
+
+.back-btn,
+.puzzle-back-btn{
+  width: 3.7rem;
+  height: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid #000;
+  border-radius: 0.85rem;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  font-family: var(--font-press-start);
+  font-size: 0.55rem;
+}
+
+.puzzle-reset-btn {
+  height: 4.5rem;
+  padding: 0 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  border-radius: 0.85rem;
+  background: #fff;
+  color: #000;
+  cursor: pointer;
+  font-family: var(--font-press-start);
+  font-size: 0.55rem;
+  white-space: nowrap;
+}
+
+.puzzle-reset-btn:hover {
+  background: #fff;
+  border-color: #000;
+}
+
+.back-arrow {
+  font-family: Arial, sans-serif;
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.puzzle-title {
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  text-align: center;
+  color: #1b0d47;
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  line-height: 1.15;
+  max-width: 100%;
+}
+
+.puzzle-grid {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 86rem);
+  margin: 0 auto clamp(2.2rem, 5vh, 3.6rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2.25rem, 6vh, 4rem) clamp(1.6rem, 3.5vw, 3.5rem);
+}
+
+.puzzle-card {
+  min-height: 8.15rem;
+  padding: 1.05rem 1.3rem 1rem;
+  border: 1px solid #000;
+  border-radius: 1.25rem;
+  background: #fff;
+  color: #000;
+  text-align: left;
+  box-shadow: 0 0.18rem 0.32rem rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.puzzle-card-locked {
+  background:
+    radial-gradient(circle, rgba(0, 0, 0, 0.53) 0.06rem, transparent 0.17rem),
+    #f0f0ed;
+  background-size: 0.25rem 0.25rem;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.puzzle-card-done {
+  border-color: #16866a;
+  box-shadow: 0 0 0 0.18rem rgba(22, 134, 106, 0.18);
+}
+
+.puzzle-level {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6.5rem;
+  height: 1.75rem;
+  padding: 0 0.95rem;
+  border: 1px solid #0b5d49;
+  border-radius: 3.1rem;
+  background: #16866a;
+  color: #fff;
+  font-family: var(--font-press-start);
+  font-size: 0.4rem;
+}
+
+.puzzle-level-intermediate {
+  border-color: #8b3d24;
+  background: #b95f41;
+}
+
+.puzzle-level-advanced {
+  border-color: #4a1d8b;
+  background: #7c3aed;
+}
+
+.puzzle-card-title {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.puzzle-card-description {
+  margin: 0;
+  max-width: 19rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+}
+
+.puzzle-decor {
+  position: absolute;
+  z-index: 1;
+  image-rendering: pixelated;
+  pointer-events: none;
+  user-select: none;
+}
+
+.puzzle-cat {
+  left: clamp(5.5rem, 11vw, 12rem);
+  bottom: calc(var(--grass-height) - 2rem);
+  width: clamp(5.8rem, 9.5vw, 8.8rem);
+}
+
+.puzzle-platform-left {
+  left: 49%;
+  bottom: calc(var(--grass-height) - 1.8rem);
+  width: clamp(7rem, 10vw, 10rem);
+}
+
+.puzzle-platform-right {
+  right: clamp(4.5rem, 9vw, 9rem);
+  bottom: calc(var(--grass-height) - 1.8rem);
+  width: clamp(7rem, 10vw, 10rem);
+}
+
+.game-screen {
+  min-height: 100vh;
+  padding: clamp(1rem, 2.2vh, 1.6rem) clamp(1.5rem, 3.7vw, 3.5rem) calc(var(--grass-height) + 0.85rem);
+  color: #1b0d47;
+  position: relative;
+}
+
+.game-screen::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3.4rem;
+  background-image: url("./assets/grass-tile.png");
+  background-repeat: repeat-x;
+  background-size: auto 3.6rem;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.game-screen-instructions-open::after {
+  opacity: 0;
+}
+
+.game-play-area {
+  position: relative;
+  z-index: 1;
+  transition: filter 160ms ease, opacity 160ms ease;
+}
+
+.game-play-area-blurred {
+  filter: blur(5px);
+  opacity: 0.46;
+  pointer-events: none;
+  user-select: none;
+}
+
+.game-topbar {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: clamp(0.65rem, 1.3vh, 0.95rem);
+}
+
+.game-back-btn,
+.game-actions button {
+  border: 1px solid #000;
+  background: #fff;
+  color: #000;
+  border-radius: 1rem;
+  min-height: 2.45rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+}
+
+.game-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.game-back-btn span {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.game-title-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.game-title-group h1 {
+  margin: 0;
+  font-family: var(--font-press-start);
+  font-size: clamp(0.9rem, 1.55vw, 1.1rem);
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-difficulty {
+  min-width: 0;
+  flex-shrink: 0;
+  text-transform: capitalize;
+}
+
+.game-actions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.game-guest-warning {
+  margin: 0 0 0.6rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 0.7rem;
+  background: #fff8e1;
+  border: 1px solid #f0c040;
+  color: #7a5500;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.game-guest-warning button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #1a56db;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.game-goal,
+.game-panel,
+.terminal-window {
+  border: 1px solid #000;
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0.18rem 0.32rem rgba(0, 0, 0, 0.18);
+}
+
+.game-goal {
+  position: relative;
+  z-index: 1;
+  padding: 0.72rem 1rem;
+  margin-bottom: clamp(0.65rem, 1.3vh, 0.95rem);
+  font-family: 'IBM Plex Mono', monospace;
+  line-height: 1.35;
+}
+
+.game-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.game-main {
+  min-width: 0;
+  display: grid;
+  gap: clamp(0.55rem, 1.2vh, 0.8rem);
+}
+
+.graphs-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  min-height: 0;
+}
+
+.game-panel {
+  overflow: hidden;
+}
+
+.game-panel-header {
+  min-height: 2.5rem;
+  padding: 0.62rem 0.85rem;
+  border-bottom: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.game-panel-header h2 {
+  margin: 0;
+  font-family: var(--font-press-start);
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+
+.graph-card-solved {
+  border-color: #16866a;
+}
+
+.graph-matched-label {
+  color: #16866a;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.graph-scroll {
+  height: clamp(12rem, 34vh, 17rem);
+  min-height: 0;
+  overflow: auto;
+  padding: 0.7rem;
+}
+
+.gitgraph-canvas {
+  min-width: 21rem;
+  min-height: 12rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.gitgraph-canvas svg {
+  display: block;
+}
+
+.empty-graph {
+  min-height: 16rem;
+  display: grid;
+  place-items: center;
+  color: #6b6470;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.graph-message {
+  fill: #1b0d47;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.graph-branch {
+  fill: #1b0d47;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+}
+
+.graph-head {
+  fill: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.44rem;
+  font-weight: 700;
+}
+
+.hint-panel {
+  padding: 0.62rem 0.85rem;
+  font-family: 'IBM Plex Mono', monospace;
+  line-height: 1.35;
+}
+
+.terminal-window {
+  overflow: hidden;
+}
+
+.terminal-titlebar {
+  min-height: 2.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0 1rem;
+  background: #f7f7f7;
+  border-bottom: 1px solid #000;
+}
+
+.terminal-titlebar strong {
+  margin-left: 0.8rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.terminal-dot {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+}
+
+.terminal-red {
+  background: #e44242;
+}
+
+.terminal-yellow {
+  background: #e6c417;
+}
+
+.terminal-green {
+  background: #19c837;
+}
+
+.terminal-body {
+  height: clamp(9rem, 20vh, 13rem);
+  min-height: 0;
+  overflow: auto;
+  padding: 0.7rem 0.85rem;
+  background: #fff;
+  color: #1b0d47;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.82rem;
+}
+
+.terminal-body p {
+  margin: 0 0 0.25rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.game-line-input {
+  color: #1b0d47;
+  font-weight: 700;
+}
+
+.game-line-output {
+  color: #242424;
+}
+
+.game-line-success {
+  color: #16866a;
+  font-weight: 700;
+}
+
+.game-line-error {
+  color: #c83b3b;
+  font-weight: 700;
+}
+
+.game-line-info {
+  color: #6b6470;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.8rem;
+}
+
+.terminal-input-line span {
+  color: #16866a;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.terminal-input-line input {
+  min-width: 0;
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #1b0d47;
+  font: inherit;
+}
+
+.terminal-input-line input::placeholder {
+  color: rgba(27, 13, 71, 0.45);
+}
+
+.terminal-input-line button {
+  border: none;
+  background: transparent;
+  color: #1b0d47;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.game-instruction-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 1.5rem;
+  background: rgba(27, 13, 71, 0.22);
+  overflow: auto;
+}
+
+.game-instruction-card {
+  width: min(49rem, 100%);
+  min-height: min(42rem, calc(100vh - 3rem));
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 0.8rem 1.4rem rgba(0, 0, 0, 0.22);
+  padding: clamp(2rem, 4vw, 3rem);
+  color: #1b0d47;
+}
+
+.game-instruction-count {
+  display: inline-block;
+  margin: 0 0 1.6rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  color: #16866a;
+  font-weight: 700;
+}
+
+.game-instruction-card h2 {
+  margin: 0 0 1.8rem;
+  font-family: var(--font-press-start);
+  font-size: clamp(2rem, 6vw, 3.3rem);
+  line-height: 1.35;
+}
+
+.game-instruction-card p {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(1rem, 2.7vw, 1.55rem);
+  line-height: 1.55;
+}
+
+.game-instruction-actions {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.42fr) minmax(6rem, 0.34fr) 1fr;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.game-instruction-actions button {
+  width: 100%;
+  min-height: 4rem;
+  border: 1px solid #000;
+  border-radius: 1rem;
+  background: #1b0d47;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.game-instruction-actions .game-instruction-previous,
+.game-instruction-actions .game-instruction-skip {
+  background: #fff;
+  color: #1b0d47;
+}
+
+.game-instruction-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .game-topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .game-title-group,
+  .game-actions {
+    justify-content: flex-start;
+  }
+
+  .graphs-row {
+    grid-template-columns: 1fr;
+  }
+
+  .terminal-input-line {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+
+
+.multiplayer{
+  min-height: 100vh;
+
+  position: relative;
+
+  padding: 4.4rem 5.4rem calc(var(--grass-height) + 1.25rem);
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+.multiplayer .grass-tile-top {
+  position: absolute;
+
+  z-index: 0;
+}
+
+
+.multiplayer-section{
+  position: relative;
+
+  z-index: 3;
+
+  margin-top: clamp(6rem, 14vh, 9rem);
+
+  display: flex;
+
+  justify-content: flex-start;
+
+  padding: 0 7rem;
+}
+
+
+
+.multiplayer-actions {
+  width: 40rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2.7rem;
+
+  align-items: center;
+}
+
+.multiplayer-btn{
+  font-size: 1.15rem;
+
+  max-width: 100%;
+
+  width: 40rem;
+
+  height: 8rem;
+
+  border-radius: 3.1rem;
+
+  border: 1px solid #000;
+
+  background: #fff;
+
+  color: #000;
+
+  line-height: 1;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0 1em;
+}
+
+.multiplayer-title {
+  position: relative;
+
+  z-index: 3;
+
+  font-size: clamp(2.3rem, 5vw, 3rem);
+
+  color: #2a1a4a;
+
+  text-align: center;
+
+  margin: 0;
+
+  line-height: 1.15;
+
+}
+
+.multiplayer .back-btn {
+  position: absolute;
+
+  left: clamp(1.1rem, 5vw, 5rem);
+
+  top: clamp(1.1rem, 5vh, 3.4rem);
+
+  z-index: 4;
+}
+
+.multiplayer-decor {
+  position: absolute;
+
+  z-index: 1;
+
+  image-rendering: pixelated;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+.multiplayer-building {
+  right: clamp(3.5rem, 8vw, 8rem);
+
+  bottom: calc(var(--grass-height) - 0.6rem);
+
+  width: clamp(9rem, 13vw, 12rem);
+}
+
+.multiplayer-cloud-left,
+.multiplayer-cloud-right {
+  z-index: 0;
+
+  animation: decorFloat 5s ease-in-out infinite;
+}
+
+.multiplayer-cloud-left {
+  left: -1.2rem;
+
+  top: 1.2rem;
+
+  width: clamp(10rem, 23vw, 20rem);
+}
+
+.multiplayer-cloud-right {
+  right: 2rem;
+
+  top: 1.2rem;
+
+  width: clamp(10rem, 22vw, 19rem);
+}
+
+
+
+
+
+
+
+.join-room-blur{
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(0.35rem);
+}
+
+
+
+.join-room-container{
+  width: 31rem;
+  max-width: 100%;
+  min-height: 16.25rem;
+  padding: 3rem 4rem 2.5rem;
+  border: 1px solid #000;
+  border-radius: 1.25rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.join-room-title{
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+
+.join-room-input{
+  width: 100%;
+  height: 4.5rem;
+  border: 1px solid #000;
+  border-radius: 1.1rem;
+  padding: 0 1rem;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  outline: none;
+}
+
+.join-room-action{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 3.8rem;
+  margin-top: 1.25rem;
+}
+
+
+.join-room-btn{
+  flex: 1;
+  height: 2.25rem;
+  border: 1px solid #000;
+  border-radius: 3.1rem;
+  background: #fff;
+  color: #000;
+  font-size: 0.5rem;
+  cursor: pointer;
+}
+
+.sound-btn {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(var(--grass-height, 3.4rem) + 0.75rem);
+  z-index: 20;
+  min-height: 2.25rem;
+  border: 1px solid #000;
+  border-radius: 999px;
+  background: #fff;
+  color: #1b0d47;
+  padding: 0 0.9rem;
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  box-shadow: 0 0.18rem 0.32rem rgba(0, 0, 0, 0.18);
+}
+
+
+
+
+.documentation-page {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 2rem clamp(1.5rem, 4vw, 5rem);
+  background: linear-gradient(110deg, #ffc4ef 0%, #8bb9ff 100%);
+}
+
+.documentation-title {
+  text-align: center;
+  color: #1b0d47;
+  font-size: 4rem;
+  margin: 2.5rem 0 3.5rem;
+}
+
+.documentation-sections {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+.documentation-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.documentation-section-title {
+  color: #1b0d47;
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.documentation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.2rem 2.2rem;
+}
+
+.documentation-card {
+  width: 100%;
+  min-height: 4rem;
+  padding: 0.85rem 1.2rem;
+  border: 2px solid #222;
+  border-radius: 999px;
+  background: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  line-height: 1.25;
+  cursor: pointer;
+}
+
+.documentation-card:hover {
+  transform: translateY(-4px);
+}
+
+.documentation-detail-title {
+  text-align: center;
+  color: #1b0d47;
+  font-size: 4rem;
+  margin: 1rem 0 2rem;
+}
+
+.documentation-lesson-card {
+  position: relative;
+  z-index: 2;
+  width: min(58rem, 92vw);
+  margin: 0 auto 7rem;
+  padding: 1.2rem;
+  border-radius: 1.5rem;
+  background: #fff;
+  color: #1b0d47;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.documentation-lesson-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.documentation-lesson-heading {
+  margin: 0;
+  color: #6f6a7e;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.documentation-lesson-section p,
+.documentation-lesson-section li {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.documentation-lesson-section ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.documentation-graph-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.documentation-graph {
+  min-height: 15rem;
+  padding: 0.9rem 1rem;
+  border: 2px solid #dedbd3;
+  border-radius: 0.6rem;
+  background: #f8f7f1;
+  overflow: hidden;
+}
+
+.documentation-graph-title {
+  margin: 0 0 1rem;
+  color: #6f6a7e;
+  font-size: 0.8rem;
+}
+
+.documentation-graph-row {
+  display: flex;
+  min-height: 11rem;
+  align-items: flex-start;
+}
+
+.documentation-graph-step {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.documentation-node {
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 3px solid #2b86d8;
+  border-radius: 50%;
+  background: #d9ecff;
+  color: #1b0d47;
+  display: grid;
+  place-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.documentation-node-new {
+  border-color: #1f9b6d;
+  background: #daf4df;
+}
+
+.documentation-node-muted {
+  border-color: #a3a0aa;
+  background: #ebe9ee;
+  opacity: 0.55;
+}
+
+.documentation-node-message {
+  width: 8rem;
+  margin: 0.5rem 0 0;
+  color: #1b0d47;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.documentation-node-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+  margin-top: 0.45rem;
+}
+
+.documentation-node-label {
+  min-width: 4.2rem;
+  padding: 0.22rem 0.55rem;
+  border: 2px solid #1b0d47;
+  border-radius: 0.45rem;
+  background: #fff;
+  color: #1b0d47;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.documentation-node-label-head {
+  border-color: #1b0d47;
+  background: #15906f;
+  color: #fff;
+}
+
+.documentation-node-label-tag {
+  border-color: #8a61d7;
+  background: #efe7ff;
+}
+
+.documentation-node-label-detached {
+  border-color: #b67821;
+  background: #fff3d4;
+}
+
+.documentation-arrow {
+  position: absolute;
+  top: 1.55rem;
+  left: calc(50% + 1.8rem);
+  right: calc(-50% + 1.8rem);
+  height: 0.18rem;
+  background: #777;
+}
+
+.documentation-arrow::after {
+  content: "";
+  position: absolute;
+  right: -0.1rem;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-top: 0.18rem solid #777;
+  border-right: 0.18rem solid #777;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.documentation-cat {
+  position: absolute;
+  left: 10rem;
+  bottom: 3.7rem;
+  width: 7.2rem;
+  z-index: 2;
+}
+
+.documentation-bench {
+  position: absolute;
+  bottom: 3.6rem;
+  width: 10.5rem;
+  z-index: 2;
+}
+
+.documentation-bench-one {
+  right: 28rem;
+}
+
+.documentation-bench-two {
+  right: 12rem;
+}
