@@ -17,14 +17,16 @@ export interface DocumentationItem {
   id: string;
   title: string;
   image: string;
+  section: string;
   whatItDoes: string;
   graphChanges: string[];
 }
 
-export const documentationData = [
+export const documentationData: DocumentationItem[] = [
   {
     id: "git-commit",
     title: "git commit",
+    section: "Saving Work",
     image: gitCommit,
     whatItDoes:
       "Records the staged work as a new commit in the repository. This creates a saved point in history that you can return to later.",
@@ -38,6 +40,7 @@ export const documentationData = [
   {
     id: "git-branch",
     title: "git branch <branch-name>",
+    section: "Branches",
     image: gitBranch,
     whatItDoes:
       "Creates a new branch name at your current commit. It does not change your files or move you to the new branch.",
@@ -51,6 +54,7 @@ export const documentationData = [
   {
     id: "git-switch",
     title: "git switch <branch-name>",
+    section: "Checking out",
     image: gitSwitch,
     whatItDoes:
       "Moves your working position to another existing branch so you can continue work from that branch.",
@@ -64,6 +68,7 @@ export const documentationData = [
   {
     id: "git-switch-c",
     title: "git switch -c <branch-name>",
+    section: "Checking out",
     image: gitSwitchC,
     whatItDoes:
       "Creates a new branch and immediately moves you onto it. It is a shortcut for creating a branch and switching to it.",
@@ -77,6 +82,7 @@ export const documentationData = [
   {
     id: "git-merge",
     title: "git merge <branch-name>",
+    section: "Combining Work",
     image: gitMerge,
     whatItDoes:
       "Combines work from another branch into your current branch. This brings separate histories together.",
@@ -90,6 +96,7 @@ export const documentationData = [
   {
     id: "git-status",
     title: "git status",
+    section: "Inspecting",
     image: gitStatus,
     whatItDoes:
       "Checks the current state of your files. It tells you which files are changed, staged, or untracked.",
@@ -103,6 +110,7 @@ export const documentationData = [
   {
     id: "git-commit-amend",
     title: "git commit --amend",
+    section: "Saving Work",
     image: gitCommitAmend,
     whatItDoes: "Replaces the most recent commit with an updated version.",
     graphChanges: [
@@ -115,6 +123,7 @@ export const documentationData = [
   {
     id: "git-branch-delete",
     title: "git branch -d <branch name>",
+    section: "Branches",
     image: gitBranchDelete,
     whatItDoes: "Deletes a branch label that you no longer need.",
     graphChanges: [
@@ -127,6 +136,7 @@ export const documentationData = [
   {
     id: "git-rebase",
     title: "git rebase <branch name>",
+    section: "Combining Work",
     image: gitRebase,
     whatItDoes: "Moves your current branch so it starts from another branch’s latest commit.",
     graphChanges: [
@@ -139,6 +149,7 @@ export const documentationData = [
   {
     id: "git-reset-hard",
     title: "git reset --hard HEAD~n",
+    section: "Undoing",
     image: gitResetHard,
     whatItDoes: "Moves the current branch backward and discards matching working directory changes.",
     graphChanges: [
@@ -151,6 +162,7 @@ export const documentationData = [
   {
     id: "git-revert",
     title: "git revert <commit>",
+    section: "Undoing",
     image: gitRevert,
     whatItDoes: "Creates a new commit that undoes the changes from an earlier commit.",
     graphChanges: [
@@ -163,6 +175,7 @@ export const documentationData = [
   {
     id: "git-tag",
     title: "git tag <name>",
+    section: "Tags",
     image: gitTag,
     whatItDoes: "Adds a named label to a specific commit, often used for versions or releases.",
     graphChanges: [
@@ -175,6 +188,7 @@ export const documentationData = [
   {
     id: "git-log-oneline",
     title: "git log --oneline",
+    section: "Inspecting",
     image: gitLogOneline,
     whatItDoes: "Shows the commit history in a compact one-line format.",
     graphChanges: [
@@ -187,6 +201,7 @@ export const documentationData = [
   {
     id: "git-describe",
     title: "git describe",
+    section: "Tags",
     image: gitDescribe,
     whatItDoes: "Gives a human-readable name for the current commit based on the nearest tag.",
     graphChanges: [

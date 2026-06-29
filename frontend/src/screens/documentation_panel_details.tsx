@@ -11,7 +11,7 @@ function DocumentationDetail(): ReactElement {
 
   if (!doc) {
     return (
-      <section className="documentation-page">
+      <section className="documentation-page documentation-panel-details">
         <BackBtn />
         <h1 className="documentation-detail-title font-press-start">
           Documentation Not Found
@@ -21,14 +21,14 @@ function DocumentationDetail(): ReactElement {
   }
 
   return (
-    <section className="documentation-page">
+    <section className="documentation-page documentation-panel-details">
       <BackBtn />
 
       <h1 className="documentation-detail-title font-press-start">
         {doc.title}
       </h1>
 
-      <div className="documentation-info-box font-press-start">
+      <div className="documentation-info-box documentation-detail-box font-press-start">
         <h2>WHAT IT DOES</h2>
         <p>{doc.whatItDoes}</p>
 
